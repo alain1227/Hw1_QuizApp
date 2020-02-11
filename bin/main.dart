@@ -6,7 +6,7 @@ void main(List<String> arguments) {
   print(multipleChoice('testQ', 4));
 }
 
-multipleChoice(question, answerNum){
+String multipleChoice(question, answerNum){
   // ignore: omit_local_variable_types
   RegExp regExp = RegExp('[1-$answerNum]', caseSensitive: false, multiLine: false);
   print(question);
@@ -15,7 +15,7 @@ multipleChoice(question, answerNum){
   while(notAnswered){
     print('Enter your answer: [1-$answerNum]');
     inputText= stdin.readLineSync();
-    if (!regExp.hasMatch(inputText)){
+    if (!regExp.hasMatch(inputText) && inputText.length != 1){
       print('Error please reinput');
       continue;
     }
