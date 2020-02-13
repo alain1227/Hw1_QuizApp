@@ -1,25 +1,12 @@
-import 'package:Hw1_QuizApp/Hw1_QuizApp.dart' as Hw1_QuizApp;
-import 'dart:io';
+import 'package:Hw1_QuizApp/InputOutput.dart' as io;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-
-void main(List<String> arguments) {
-  print(multipleChoice('testQ', 4));
-}
-
-String multipleChoice(question, answerNum){
-  // ignore: omit_local_variable_types
-  RegExp regExp = RegExp('[1-$answerNum]', caseSensitive: false, multiLine: false);
-  print(question);
-  var notAnswered = true;
-  var inputText;
-  while(notAnswered){
-    print('Enter your answer: [1-$answerNum]');
-    inputText= stdin.readLineSync();
-    if (!regExp.hasMatch(inputText) || inputText.length != 1){
-      print('Error please reinput');
-      continue;
-    }
-    notAnswered=false;
-  }
-  return inputText;
+void main(List<String> arguments) async{
+  var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/?quiz=quiz02';
+  var response = await http.get(url);
+//  print('Response status: ${response.statusCode}');
+//  print('Response body: ${response.body}');
+  var decode = json.decode(response.body);
+  io.beginQuiz(decode);
 }
