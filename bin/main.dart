@@ -15,7 +15,7 @@ String multipleChoice(question, answerNum){
   while(notAnswered){
     print('Enter your answer: [1-$answerNum]');
     inputText= stdin.readLineSync();
-    if (!regExp.hasMatch(inputText) && inputText.length != 1){
+    if (!regExp.hasMatch(inputText) || inputText.length != 1){
       print('Error please reinput');
       continue;
     }
