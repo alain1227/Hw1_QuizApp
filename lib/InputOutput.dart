@@ -2,44 +2,51 @@ import 'dart:io';
 
 void beginQuiz(var json) {
   var questions = json['quiz']['question'];
-  stdout.write('Name: ' + json['quiz']['name']);
-  for (var i = 0; i < questions.length; i++){
-    if (questions[i]['type'] == 1) {
-      multipleChoice(questions[i]['stem'], questions[i]['option'], questions[i]['option'].length);
+  print('Name: ' + json['quiz']['name']);
+  for (var question in questions){
+    if (question['type'] == 1) {
+      multipleChoice(question['stem'], question['option']);
     } else {
-      fillInTheBlank(questions[i]['stem']);
+      fillInTheBlank(question['stem']);
     }
   }
 }
 
-int multipleChoice(question, answers, answerNum){
+int multipleChoice(question, answers){
   // ignore: omit_local_variable_types
-  RegExp regExp = RegExp('[1-$answerNum]', caseSensitive: false, multiLine: false);
-  stdout.write(question + '\n');
+  RegExp regExp = RegExp('[1-${answers.length}]', caseSensitive: false, multiLine: false);
+  print(question);
   for (var i = 0; i < answers.length; i++) {
-    stdout.write((i+1).toString() + '. ' + answers[i] + '\n');
+    print((i+1).toString() + '. ' + answers[i]);
   }
   var notAnswered = true;
   var inputText;
   while(notAnswered){
-    stdout.write('Enter your answer: [1-$answerNum]\n');
+    print('Enter your answer: [1-${answers.length}]');
     try {
       inputText = stdin.readLineSync();
       if (!regExp.hasMatch(inputText)) {
-        stdout.write('Answer must be within [1-$answerNum]');
+        print('Answer must be within [1-${answers.length}]');
         continue;
       }
       inputText = int.parse(inputText);
       notAnswered = false;
     } catch(e){
-      stdout.write('Error input try again.');
+      print('Error input try again.');
     }
   }
   return inputText;
 }
 
 String fillInTheBlank(question) {
-  stdout.write(question + '\n');
-  stdout.write('Enter your answer:\n');
-  return stdin.readLineSync();;
+  print(question);
+  print('Enter your answer:');
+  var input = stdin.readLineSync();
+  if(input == null || input == ''){
+    print('Answer is empty. Please re-enter');
+    return fillInTheBlank(question);
+  }
+  return input;
 }
+
+
