@@ -1,12 +1,11 @@
 import 'dart:math';
-
 import 'Question.dart';
 
 class Quiz {
-  var _questions = [];
+  final _questions = [];
 
   Quiz(List possibleQuestions, int questionNumber){
-    Random ran = Random();
+    var ran = Random();
     var currentQuestion;
     var currentQuiz;
     var currentNum;

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:Hw1_QuizApp/Quiz.dart';
 import 'package:Hw1_QuizApp/QuizParser.dart';
 var qp;

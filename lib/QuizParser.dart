@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class QuizParser {
-  var _Quiz;
+  final _Quiz;
   var currentQ = 0;
 
   QuizParser(this._Quiz);

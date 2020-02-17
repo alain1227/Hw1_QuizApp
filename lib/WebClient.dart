@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebClient {
-  Future getQuestions () async{
+  Future getQuestions() async{
     var Questions = [];
     var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/?quiz=quiz01';
     var response = await http.get(url);
