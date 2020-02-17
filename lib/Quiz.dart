@@ -20,14 +20,14 @@ class Quiz {
 
   int unanswered(){
     var counter = 0;
-    _questions.forEach((question) => counter+= (question.getquestionAnswer() == null)? 1:0);
+    _questions.forEach((question) => counter+= (question.getQuestionAnswer() == null)? 1:0);
     return counter;
   }
 
   int firstUnanswered(){
     var index = 0;
     for (var question in _questions){
-      if(question.getquestionAnswer() == null){
+      if(question.getQuestionAnswer() == null){
         return index;
       }
       index++;
@@ -44,11 +44,11 @@ class Quiz {
   }
 
   int answerNumber(int number){
-    return _questions[number].getpossibleAnswers().length;
+    return _questions[number].getPossibleAnswers().length;
   }
 
   void setAnswer(int number, String input){
-    _questions[number].setquestionAnswer(input);
+    _questions[number].setQuestionAnswer(input);
   }
 
   int quizLength(){
