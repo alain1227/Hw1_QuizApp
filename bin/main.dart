@@ -15,6 +15,6 @@ void main(List<String> arguments) async{
   } else {
     numQuest = 5;
   }
-//  io.beginQuiz(await Quiz(wc.getQuestions(), numQuest));
-  await wc.getQuestions();
+  io.beginQuiz(await wc.getQuestions().then((value) => Quiz(value, numQuest)));
+//  print(await wc.getQuestions().runtimeType);
 }
