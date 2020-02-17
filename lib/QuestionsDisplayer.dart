@@ -25,7 +25,7 @@ int multipleChoice(question, answers){
     print('Enter your answer: [1-${answers.length}]');
     try {
       inputText = stdin.readLineSync();
-      if (!regExp.hasMatch(inputText)) {
+      if (!regExp.hasMatch(inputText) && inputText.length == 1) {
         print('Answer must be within [1-${answers.length}]');
         continue;
       }
