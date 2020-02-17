@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:Hw1_QuizApp/Quiz.dart';
 import 'package:Hw1_QuizApp/WebClient.dart';
-import 'package:Hw1_QuizApp/QuestionsDisplayer.dart' as io;
+import 'package:Hw1_QuizApp/QuestionsDisplayer.dart' as qd;
 
 void main(List<String> arguments) async{
   dynamic numQuest;
@@ -16,6 +16,5 @@ void main(List<String> arguments) async{
   } else {
     numQuest = int.parse(numQuest);
   }
-  io.conductQuiz(await wc.getQuestions().then((value) => Quiz(value, numQuest)));
-//  print(await wc.getQuestions().runtimeType);
+  qd.conductQuiz(await wc.getQuestions().then((value) => Quiz(value, numQuest)));
 }

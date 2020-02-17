@@ -5,50 +5,51 @@ class Question{
   var _isCorrect = false;
   Question(this._question, this._possibleAnswers);
 
-  void setquestion(var question){
-    this._question = question;
+  void setQuestion(var question){
+    _question = question;
   }
 
-  void setpossibleAnswers(var possibleAnswers){
-    this._possibleAnswers = possibleAnswers;
+  void setPossibleAnswers(var possibleAnswers){
+    _possibleAnswers = possibleAnswers;
   }
 
-  void setquestionAnswer(var questionAnswers){
-    this._questionAnswer = questionAnswers;
+  void setQuestionAnswer(var questionAnswers){
+    _questionAnswer = questionAnswers;
     isCorrect();
   }
 
   void isCorrect(){
-    this._isCorrect = _possibleAnswers == _questionAnswer;
+    _isCorrect = _possibleAnswers == _questionAnswer;
   }
 
-  String getquestion(){
+  String getQuestion(){
     return _question;
   }
 
-  List getpossibleAnswers(){
+  List getPossibleAnswers(){
     return _possibleAnswers;
   }
 
-  String getquestionAnswer(){
+  String getQuestionAnswer(){
     return _questionAnswer;
   }
 
-  bool getisCorrect(){
+  bool getIsCorrect(){
     return _isCorrect;
   }
 
   void printQ(){
-    print(this._question);
+    print(_question);
     var counter = 1;
-    if(_possibleAnswers != null)
+    if(_possibleAnswers != null) {
       _possibleAnswers.forEach((answer) => print('[${counter++}] '+ answer));
-    if(_questionAnswer != null)
+    }
+    if(_questionAnswer != null) {
       print(_questionAnswer);
+    }
   }
 
   bool type(){
     return (_possibleAnswers == null);
   }
-
 }

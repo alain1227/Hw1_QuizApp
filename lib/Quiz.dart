@@ -1,12 +1,11 @@
 import 'dart:math';
-
 import 'Question.dart';
 
 class Quiz {
-  var _questions = [];
+  final _questions = [];
 
   Quiz(List possibleQuestions, int questionNumber){
-    Random ran = Random();
+    var ran = Random();
     var currentQuestion;
     var currentQuiz;
     var currentNum;
@@ -36,7 +35,7 @@ class Quiz {
     return -1;
   }
 
-  String printQuestion(int number){
+  void printQuestion(int number){
     _questions[number].printQ();
   }
 
@@ -45,15 +44,14 @@ class Quiz {
   }
 
   int answerNumber(int number){
-    return _questions[number].getpossibleAnswers().length;
+    return _questions[number].getPossibleAnswers().length;
   }
 
   void setAnswer(int number, String input){
-    _questions[number].setquestionAnswer(input);
+    _questions[number].setQuestionAnswer(input);
   }
 
   int quizLength(){
     return _questions.length;
   }
-
 }

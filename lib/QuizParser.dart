@@ -1,23 +1,27 @@
 import 'dart:io';
 
 class QuizParser {
-  var _Quiz;
+  final _Quiz;
   var currentQ = 0;
 
   QuizParser(this._Quiz);
 
   void previousQuestion() {
-    if(currentQ > 0)
+    if(currentQ > 0) {
       currentQ--;
-    else
+    }
+    else {
       print('There is no previous question');
+    }
   }
 
   void nextQuestion() {
-    if(currentQ  < _Quiz.quizLength()-1)
+    if(currentQ  < _Quiz.quizLength()-1) {
       currentQ++;
-    else
+    }
+    else {
       print('There is no next question');
+    }
   }
 
   bool printQuestion() {
@@ -25,17 +29,31 @@ class QuizParser {
     var userInput;
     if(_Quiz.getType(currentQ)) {
       userInput = fillInTheBlank();
-      if(navigationTester(userInput))
+      if(navigationTester(userInput)) {
         return false;
+      }
       _Quiz.setAnswer(currentQ, userInput);
     }
     else {
       userInput = multipleChoice(_Quiz.answerNumber(currentQ));
-      if(navigationTester(userInput))
+      if(navigationTester(userInput)) {
         return false;
+      }
       _Quiz.setAnswer(currentQ, userInput);
     }
     return true;
+  }
+
+  bool navigationTester(var userInput){
+    if(userInput == 'p') {
+      previousQuestion();
+      return true;
+    }
+    else if(userInput == 'n'){
+      nextQuestion();
+      return true;
+    }
+    return false;
   }
 
   String fillInTheBlank() {
@@ -69,17 +87,5 @@ class QuizParser {
       }
     }
     return inputText;
-  }
-
-  bool navigationTester(var userInput){
-    if(userInput == 'p') {
-      previousQuestion();
-      return true;
-    }
-    else if(userInput == 'n'){
-      nextQuestion();
-      return true;
-    }
-    return false;
   }
 }
