@@ -9,13 +9,31 @@ class Quiz {
     var currentQuestion;
     var currentQuiz;
     var currentNum;
+    var currentQuestionAnswer = [];
     for(var i =0; i < questionNumber; i++){
       currentQuiz = ran.nextInt(possibleQuestions.length);
       currentNum = ran.nextInt(possibleQuestions[currentQuiz].length);
       currentQuestion = possibleQuestions[currentQuiz][currentNum];
       possibleQuestions[currentQuiz].removeAt(currentNum);
-      _questions.add(Question(currentQuestion['stem'], currentQuestion['option']));
+      if(currentQuestion['answer'] is int) {
+        currentQuestionAnswer.add(currentQuestion['answer'].toString());
+        _questions.add(Question(currentQuestion['stem'], currentQuestion['option'], currentQuestionAnswer));
+        currentQuestionAnswer = [];
+      }
+      else{
+        _questions.add(Question(currentQuestion['stem'], currentQuestion['option'], currentQuestion['answer']));
+      }
     }
+  }
+
+  List quizResults() {
+    var wrongQuestion = [];
+    for (var question in _questions) {
+      if (!question.getIsCorrect()) {
+        wrongQuestion.add(question);
+      }
+    }
+    return wrongQuestion;
   }
 
   int unanswered(){
@@ -35,7 +53,7 @@ class Quiz {
     return -1;
   }
 
-  String printQuestion(int number){
+  void printQuestion(int number){
     _questions[number].printQ();
   }
 

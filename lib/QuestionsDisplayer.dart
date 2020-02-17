@@ -4,7 +4,7 @@ import 'package:Hw1_QuizApp/QuizParser.dart';
 var qp;
 
 void conductQuiz(Quiz quiz) {
-  String userinput;
+  String userInput;
   qp = QuizParser(quiz);
   while (true) {
     if (qp.printQuestion()) {
@@ -27,6 +27,20 @@ void conductQuiz(Quiz quiz) {
       }
     }
   }
+  var wrongQuestions = quiz.quizResults();
+  print('Quiz Results: [${quiz.quizLength()-wrongQuestions.length}/${quiz.quizLength()}]');
+  print('Review the wrong questions?[yes/no]');
+  userInput = stdin.readLineSync();
+  if(userInput == 'yes') {
+    showWrongQuestions(wrongQuestions);
+  }
+}
+
+void showWrongQuestions(var wrongQuestions) {
+  for (var question in wrongQuestions) {
+    question.printQ();
+    question.printA();
+  }
 }
 
 bool endSequence(){
@@ -42,22 +56,24 @@ bool endSequence(){
     }
   }
   print('Would you like to submit[yes/no]');
-  if(stdin.readLineSync() == 'yes')
+  if(stdin.readLineSync() == 'yes') {
     return true;
-  else{
+  }
+  else {
     return false;
   }
 }
 
 void questionReview(){
   var userinput;
-  bool rejectedSubmit = false;
+  var rejectedSubmit = false;
   while(true){
     if(qp.unansweredNumber() == 0 && !rejectedSubmit){
-      print('would you like to submit');
+      print('would you like to submit[yes/no/submit]');
       userinput = stdin.readLineSync();
-      if(userinput == 'yes')
+      if(userinput == 'yes') {
         break;
+      }
       else{
         rejectedSubmit = true;
       }
@@ -65,19 +81,13 @@ void questionReview(){
     else{
       print('Would you like to go to the unanswered questions[yes/no/submit]');
       userinput = stdin.readLineSync();
-      if(userinput == 'yes')
+      if(userinput == 'yes') {
         qp.moveToUnaswered();
-      else if(userinput == 'submit')
+      }
+      else if(userinput == 'submit') {
         break;
+      }
       qp.printQuestion();
     }
   }
 }
-
-
-
-
-
-
-
-

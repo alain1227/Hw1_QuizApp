@@ -2,8 +2,9 @@ class Question{
   var _question;
   var _possibleAnswers;
   var _questionAnswer;
+  final _correctAnswer;
   var _isCorrect = false;
-  Question(this._question, this._possibleAnswers);
+  Question(this._question, this._possibleAnswers, this._correctAnswer);
 
   void setQuestion(var question){
     _question = question;
@@ -19,7 +20,11 @@ class Question{
   }
 
   void isCorrect(){
-    _isCorrect = _possibleAnswers == _questionAnswer;
+    for (var answer in _correctAnswer) {
+      if (_questionAnswer == answer) {
+        _isCorrect = true;
+      }
+    }
   }
 
   String getQuestion(){
@@ -34,19 +39,21 @@ class Question{
     return _questionAnswer;
   }
 
-  bool getIsCorrect(){
-    return _isCorrect;
-  }
+  bool getIsCorrect() => _isCorrect;
 
   void printQ(){
     print(_question);
     var counter = 1;
     if(_possibleAnswers != null) {
-      _possibleAnswers.forEach((answer) => print('[${counter++}] '+ answer));
+      _possibleAnswers.forEach((answer) => print('[${counter++}] $answer'));
     }
     if(_questionAnswer != null) {
-      print(_questionAnswer);
+      print('Your answer: $_questionAnswer');
     }
+  }
+
+  void printA() {
+    print('Correct answer: $_correctAnswer');
   }
 
   bool type(){
