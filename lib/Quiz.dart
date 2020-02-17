@@ -1,17 +1,21 @@
 import 'dart:math';
 
+import 'Question.dart';
+
 class Quiz {
   var _questions = [];
 
-  Quiz(List possibleQuestions, var questionNumber){
+  Quiz(List possibleQuestions, int questionNumber){
     Random ran = Random();
     var currentQuestion;
-    var currentNumber;
+    var currentQuiz;
+    var currentNum;
     for(var i =0; i < questionNumber; i++){
-      currentNumber = ran.nextInt(possibleQuestions.length);
-      currentQuestion = possibleQuestions[currentNumber];
-      possibleQuestions.removeAt(currentNumber);
-      _questions.add(currentQuestion);
+      currentQuiz = ran.nextInt(possibleQuestions.length);
+      currentNum = ran.nextInt(possibleQuestions[currentQuiz].length);
+      currentQuestion = possibleQuestions[currentQuiz][currentNum];
+      possibleQuestions[currentQuiz].removeAt(currentNum);
+      _questions.add(Question(currentQuestion['stem'], currentQuestion['option']));
     }
   }
 
@@ -32,6 +36,24 @@ class Quiz {
     return -1;
   }
 
-  
+  String printQuestion(int number){
+    _questions[number].printQ();
+  }
+
+  bool getType(int number){
+    return _questions[number].type();
+  }
+
+  int answerNumber(int number){
+    return _questions[number].getpossibleAnswers().length;
+  }
+
+  void setAnswer(int number, String input){
+    _questions[number].setquestionAnswer(input);
+  }
+
+  int quizLength(){
+    return _questions.length;
+  }
 
 }

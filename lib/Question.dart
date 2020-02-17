@@ -5,15 +5,15 @@ class Question{
   var _isCorrect = false;
   Question(this._question, this._possibleAnswers);
 
-  void set question(var question){
+  void setquestion(var question){
     this._question = question;
   }
 
-  void set possibleAnswers(var possibleAnswers){
+  void setpossibleAnswers(var possibleAnswers){
     this._possibleAnswers = possibleAnswers;
   }
 
-  void set questionAnswer(var questionAnswers){
+  void setquestionAnswer(var questionAnswers){
     this._questionAnswer = questionAnswers;
     isCorrect();
   }
@@ -26,7 +26,7 @@ class Question{
     return _question;
   }
 
-  String getpossibleAnswers(){
+  List getpossibleAnswers(){
     return _possibleAnswers;
   }
 
@@ -37,4 +37,18 @@ class Question{
   bool getisCorrect(){
     return _isCorrect;
   }
+
+  void printQ(){
+    print(this._question);
+    var counter = 1;
+    if(_possibleAnswers != null)
+      _possibleAnswers.forEach((answer) => print('[${counter++}] '+ answer));
+    if(_questionAnswer != null)
+      print(_questionAnswer);
+  }
+
+  bool type(){
+    return (_possibleAnswers == null);
+  }
+
 }
