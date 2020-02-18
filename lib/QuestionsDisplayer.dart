@@ -3,7 +3,8 @@ import 'package:Hw1_QuizApp/Quiz.dart';
 import 'package:Hw1_QuizApp/QuizParser.dart';
 var qp;
 
-/// Begins the quiz??
+/// Begins the quiz while using quiz parser to traverse and manipulate questions
+/// Wrong question review will be conducted at the end.
 void conductQuiz(Quiz quiz) {
   String userInput;
   qp = QuizParser(quiz);
@@ -46,6 +47,7 @@ void showWrongQuestions(var wrongQuestions) {
 }
 
 /// Final step before submitting the quiz
+/// Will check if user is ready to submit and if not continue towards unanswered question review
 bool endSequence(){
   print('There are no questions left in the quiz');
   print('${qp.unansweredNumber} are unanswered');
@@ -68,6 +70,7 @@ bool endSequence(){
 }
 
 /// Displays the unanswered questions based on user input
+/// User can submit, answer, or re- answer questions.
 void questionReview(){
   var userInput;
   var rejectedSubmit = false;

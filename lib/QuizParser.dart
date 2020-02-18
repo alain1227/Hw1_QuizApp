@@ -81,7 +81,7 @@ class QuizParser {
         if(navigationTester(inputText)){
           return 'navigated';
         }
-        if ((!regExp.hasMatch(inputText) && inputText.length == 1) || inputText == '') {
+        if ((!regExp.hasMatch(inputText) || inputText.length != 1) || inputText == '') {
           print('Answer must be within [1-${answers}]');
           continue;
         }
