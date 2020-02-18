@@ -3,6 +3,7 @@ import 'package:Hw1_QuizApp/Quiz.dart';
 import 'package:Hw1_QuizApp/QuizParser.dart';
 var qp;
 
+/// Begins the quiz??
 void conductQuiz(Quiz quiz) {
   String userInput;
   qp = QuizParser(quiz);
@@ -17,7 +18,7 @@ void conductQuiz(Quiz quiz) {
           break;
         }
       }
-    } else if(qp.lastQuestion()){
+    } else if(qp.lastQuestion){
       if(endSequence()){
         break;
       }
@@ -36,6 +37,7 @@ void conductQuiz(Quiz quiz) {
   }
 }
 
+/// Displays the questions that were answered wrong
 void showWrongQuestions(var wrongQuestions) {
   for (var question in wrongQuestions) {
     question.printQ();
@@ -43,11 +45,12 @@ void showWrongQuestions(var wrongQuestions) {
   }
 }
 
+/// Final step before submitting the quiz
 bool endSequence(){
   print('There are no questions left in the quiz');
-  print('${qp.unansweredNumber()} are unanswered');
-  if(qp.unansweredNumber() > 0){
-    print('Would you still like to submit[yes/no]');
+  print('${qp.unansweredNumber} are unanswered');
+  if(qp.unansweredNumber > 0){
+    print('Would you still like to submit? [yes/no]');
     if(stdin.readLineSync() == 'yes'){
       return true;
     }
@@ -55,7 +58,7 @@ bool endSequence(){
       return false;
     }
   }
-  print('Would you like to submit[yes/no]');
+  print('Would you like to submit? [yes/no]');
   if(stdin.readLineSync() == 'yes') {
     return true;
   }
@@ -64,14 +67,15 @@ bool endSequence(){
   }
 }
 
+/// Displays the unanswered questions based on user input
 void questionReview(){
-  var userinput;
+  var userInput;
   var rejectedSubmit = false;
   while(true){
-    if(qp.unansweredNumber() == 0 && !rejectedSubmit){
-      print('would you like to submit[yes/no/submit]');
-      userinput = stdin.readLineSync();
-      if(userinput == 'yes') {
+    if(qp.unansweredNumber == 0 && !rejectedSubmit){
+      print('would you like to submit? [yes/no]');
+      userInput = stdin.readLineSync();
+      if(userInput == 'yes') {
         break;
       }
       else{
@@ -79,12 +83,12 @@ void questionReview(){
       }
     }
     else{
-      print('Would you like to go to the unanswered questions[yes/no/submit]');
-      userinput = stdin.readLineSync();
-      if(userinput == 'yes') {
-        qp.moveToUnaswered();
+      print('Would you like to go to the unanswered questions?[yes/no/submit]');
+      userInput = stdin.readLineSync();
+      if(userInput == 'yes') {
+        qp.moveToUnanswered();
       }
-      else if(userinput == 'submit') {
+      else if(userInput == 'submit') {
         break;
       }
       qp.printQuestion();

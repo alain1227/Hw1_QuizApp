@@ -1,3 +1,4 @@
+/// Don't know what to add here lol
 class Question{
   var _question;
   var _possibleAnswers;
@@ -6,41 +7,38 @@ class Question{
   var _isCorrect = false;
   Question(this._question, this._possibleAnswers, this._correctAnswer);
 
-  void setQuestion(var question){
+  set question(var question){
     _question = question;
   }
 
-  void setPossibleAnswers(var possibleAnswers){
+  set PossibleAnswers(var possibleAnswers){
     _possibleAnswers = possibleAnswers;
   }
 
-  void setQuestionAnswer(var questionAnswers){
+  set QuestionAnswer(var questionAnswers){
     _questionAnswer = questionAnswers;
-    isCorrect();
+    Correct = questionAnswers;
   }
 
-  void isCorrect(){
+  set Correct(var questionAnswers){
     for (var answer in _correctAnswer) {
-      if (_questionAnswer == answer) {
+      if (questionAnswers == answer) {
         _isCorrect = true;
       }
     }
   }
 
-  String getQuestion(){
-    return _question;
-  }
+  String get question => _question;
 
-  List getPossibleAnswers(){
-    return _possibleAnswers;
-  }
+  List get PossibleAnswers => _possibleAnswers;
 
-  String getQuestionAnswer(){
-    return _questionAnswer;
-  }
+  String get QuestionAnswer => _questionAnswer;
 
-  bool getIsCorrect() => _isCorrect;
+  bool get IsCorrect => _isCorrect;
 
+  bool get type => (_possibleAnswers == null);
+
+  /// Prints the current question
   void printQ(){
     print(_question);
     var counter = 1;
@@ -52,11 +50,8 @@ class Question{
     }
   }
 
+  /// Prints the current questions answers
   void printA() {
     print('Correct answer: $_correctAnswer');
-  }
-
-  bool type(){
-    return (_possibleAnswers == null);
   }
 }

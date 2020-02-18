@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+/// Retrieves questions from a given url
 class WebClient {
   Future getQuestions() async{
     var Questions = [];
